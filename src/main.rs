@@ -1,3 +1,5 @@
+mod commands;
+
 use anyhow::Ok;
 use clap::{Arg, Command};
 use dotenv::dotenv;
@@ -5,7 +7,7 @@ use dotenv::dotenv;
 pub fn main() -> anyhow::Result<()> {
     dotenv().ok();
 
-    let command = Command::new("Dog Shelter sample Axum application")
+    let mut command = Command::new("Dog Shelter sample Axum application")
         .version("1.0")
         .author("Renghen renghen@yahoo.com")
         .about("Sample rust app using axum")
@@ -16,10 +18,10 @@ pub fn main() -> anyhow::Result<()> {
                 .help("configuration file location")
                 .default_value("config.json"),
         );
+    command = commands::configure(command);
 
-    let _command_matches = command.get_matches();
-
-    println!("Hello, world!");
+    let matches = command.get_matches();
+    commands::handle(&matches)?;
 
     Ok(())
 }
