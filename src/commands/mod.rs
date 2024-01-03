@@ -1,4 +1,4 @@
-use crate::Settings;
+use crate::settings::Settings;
 use anyhow::Ok;
 use clap::{ArgMatches, Command};
 

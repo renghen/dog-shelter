@@ -1,8 +1,10 @@
-use crate::Settings;
+use crate::settings::Settings;
+
 use anyhow::Ok;
 use clap::{value_parser, Arg, ArgMatches, Command};
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 use tokio::net::TcpListener;
+use tower_http::trace::TraceLayer;
 
 pub fn configure() -> Command {
     Command::new("serve")
@@ -34,9 +36,12 @@ fn start_tokio(port: u16, _setting: &Settings) -> anyhow::Result<()> {
         .unwrap()
         .block_on(async move {
             let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)), port);
-            let routes = dog_shelter::api::configure();
+            let routes = crate::api::configure().layer(TraceLayer::new_for_http());
 
+            tracing::debug!("Binding on port {}", port);
             let listener = TcpListener::bind(addr).await?;
+
+            tracing::info!("Starting axum on port {}", port);
             axum::serve(listener, routes).await?;
 
             Ok(())
