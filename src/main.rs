@@ -1,6 +1,10 @@
+use anyhow::Ok;
 use clap::{Arg, Command};
+use dotenv::dotenv;
 
-pub fn main() {
+pub fn main() -> anyhow::Result<()> {
+    dotenv().ok();
+
     let command = Command::new("Dog Shelter sample Axum application")
         .version("1.0")
         .author("Renghen renghen@yahoo.com")
@@ -16,4 +20,6 @@ pub fn main() {
     let _command_matches = command.get_matches();
 
     println!("Hello, world!");
+
+    Ok(())
 }
