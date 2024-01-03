@@ -1,3 +1,4 @@
+use crate::Settings;
 use anyhow::Ok;
 use clap::{ArgMatches, Command};
 
@@ -10,8 +11,8 @@ pub fn configure(command: Command) -> Command {
         .subcommand(serve::configure())
 }
 
-pub fn handle(matches: &ArgMatches) -> anyhow::Result<()> {
+pub fn handle(matches: &ArgMatches, settings: &Settings) -> anyhow::Result<()> {
     hello::handle(matches)?;
-    serve::handle(matches)?;
+    serve::handle(matches, settings)?;
     Ok(())
 }

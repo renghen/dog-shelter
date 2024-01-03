@@ -2,6 +2,7 @@ mod commands;
 
 use anyhow::Ok;
 use clap::{Arg, Command};
+use dog_shelter::settings::Settings;
 use dotenv::dotenv;
 
 pub fn main() -> anyhow::Result<()> {
@@ -19,9 +20,10 @@ pub fn main() -> anyhow::Result<()> {
                 .default_value("config.json"),
         );
     command = commands::configure(command);
+    let settings = Settings {};
 
     let matches = command.get_matches();
-    commands::handle(&matches)?;
+    commands::handle(&matches, &settings)?;
 
     Ok(())
 }
