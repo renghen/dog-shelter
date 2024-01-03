@@ -18,5 +18,6 @@
         "titleBar.inactiveBackground": "#d1d47799",
         "titleBar.inactiveForeground": "#15202b99"
     },
-    "peacock.color": "#d1d477"
+    "peacock.color": "#d1d477",
+    "rust-analyzer.diagnostics.useRustcErrorCode": true
 }
