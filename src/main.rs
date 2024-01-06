@@ -37,18 +37,25 @@ pub fn main() -> anyhow::Result<()> {
 
     tracing::subscriber::set_global_default(subscriber).expect("Failed to set subscriber");
 
-    // println!(
-    //     "db url: {}",
-    //     settings
-    //         .database
-    //         .url
-    //         .unwrap_or("missing database url".to_string())
-    // );
+    tracing::info!(
+        "db url: {}",
+        settings
+            .database
+            .url
+            .as_deref()
+            .unwrap_or("missing database url")
+            .to_string()
+    );
 
-    // println!(
-    //     "log level: {}",
-    //     settings.logging.log_level.unwrap_or("info".to_string())
-    // );
+    tracing::info!(
+        "log level: {}",
+        settings
+            .logging
+            .log_level
+            .as_deref()
+            .unwrap_or("info")
+            .to_string()
+    );
 
     commands::handle(&matches, &settings)?;
 
