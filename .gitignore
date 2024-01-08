@@ -1,4 +1,8 @@
+cargo.lock
 /target
 /.vscode
 /volume/
+/migration/lock
 /migration/target
+/migration/lock
+/entity/target

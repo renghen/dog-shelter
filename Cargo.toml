@@ -1,3 +1,4 @@
+# workspace = { members = ["entity"] }
 [package]
 name = "dog-shelter"
 version = "0.1.0"
@@ -20,4 +21,9 @@ tracing-subscriber = {version = "0.3.18", features = ["registry", "env-filter"] 
 tower-http = {version = "0.5.0", features = ["trace"]}
 arc-swap = "1.6.0"
 sea-orm ={ version = "0.12.10", features = ["sqlx-postgres", "runtime-tokio-rustls", "macros"] }
-migration = { path = "./migration" }
+migration = { path = "migration" }
+entity = {path = "entity"}
+password-hash = "0.5"
+argon2 = "0.5.2"
+jsonwebtoken = "9.2.0"
+chrono = "0.4.31"
